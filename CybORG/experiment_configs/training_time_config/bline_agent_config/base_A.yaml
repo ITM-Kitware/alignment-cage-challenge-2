@@ -1,0 +1,54 @@
+seed: 42  # eval seed; must not overlap with train_seeds
+
+scenario_setting: base
+
+paths:
+  experiment_dir: results/experiments/B_lineAgent_Resilience_A/training_time_base
+  export_path: test_results.csv 
+  scenario_root: scalability_eval_scenarios
+  checkpoint_dir: checkpoints
+  checkpoint_prefix: PPO
+
+agents:
+  red_agent: B_lineAgent_Resilience_A
+  blue_agent_base_path: checkpoints/PPO_base_0.zip
+  train_seeds: [0, 1, 2, 3, 4]
+
+env:
+  episodes: 100
+  steps: 200
+  verbose: false
+  average_metric: false
+  save_trajectories: false
+
+alignment:
+  attributes_to_run: ["A"]
+  alpha_range:
+    start: 0.5         # minimum interpolation weight
+    stop: 3.0            # maximum interpolation weight
+    num: 6              # number of alpha values (linspace)
+
+analysis:
+  # Metric column from test_results.csv to plot on secondary axis
+  # Options: Reward, Resilience Drop
+  metric: Reward
+  # true: agent names follow training-time format ("Aligned RL 0.5 C agent")
+  # false: agent names follow test-time format ("RL-a0.5-C1 agent")
+  training_time: true
+  # true: recompute alignment scores from scenario CSVs
+  # false: load from cached all_alignment_scores.csv
+  recalculate: true
+  # Number of alpha values for analysis (do not need to plot all)
+  alpha_sampling_range: 6
+  # If calculating knee-point. Will export to a file kneepoint.csv in experiment_dir
+  # Note: Need to have a good number of alpha in the analysis file (num>=50 is ideal)
+  calculate_kneepoint: false
+  #path to the base, untrained PPO agent results for comparison
+  blue_agent_base_results: results/experiments/B_lineAgent_Resilience_A/base
+  # Action space mapping file corresponding 
+  # to the scenario. Used to filter out Remove actions from the alignment score
+  # since these actions have some prereqs in the
+  # env in order for it to work (blue has to analyze the host before 
+  # being able to Remove) 
+  action_space_file: "CybORG/Shared/Scenarios/scalability_eval_scenarios/action_spaces/base.json"
+regenerate: false

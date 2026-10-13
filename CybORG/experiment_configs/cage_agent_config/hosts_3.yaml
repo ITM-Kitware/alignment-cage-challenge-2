@@ -1,0 +1,56 @@
+seed: 42  # eval seed; must not overlap with train_seeds
+
+paths:
+  experiment_dir: results/experiments/RedMeanderAgent_Combination_CAGE/hosts_3
+  export_path: test_results.csv          # relative to experiment_dir
+  # Available scenarios: base, hosts_2, hosts_3, hosts_4, hosts_5
+  scenario: scalability_eval_scenarios/hosts_3
+  blue_agent_base_path: checkpoints/PPO_hosts_3_0.zip
+
+env:
+  episodes: 100
+  steps: 400
+  verbose: false        # print per-episode C, I, A, Reward to stdout
+  average_metric: false # true: average CIA per step, false: sum across steps
+  save_trajectories: false
+
+agents:
+  # Red agents: B_lineAgent_Resilience, B_lineAgent_Resilience_A,
+  # B_lineAgent_Resilience_C, B_lineAgent_Resilience_I,
+  # RedMeanderAgent_Resilience, RedMeanderAgent_RandomImpact,
+  # RedMeanderAgent_Combination_CIA, RedMeanderAgent_Combination_CAGE
+  red_agent: RedMeanderAgent_Combination_CAGE
+  # Blue agents: PPOAgent, AlignedPPOAgent, RandomAgent, BlueMonitorAgent
+  blue_agent: PPOAgent
+  train_seeds: [0, 1, 2, 3, 4]
+
+alignment:
+  alpha_range:
+    start: 0.25           # minimum interpolation weight
+    stop: 1.0            # maximum interpolation weight
+    num: 4               # number of alpha values (linspace)
+  # Attributes to sweep: any subset of ["C", "I", "A"]
+  # C = Confidentiality, I = Integrity, A = Availability
+  attributes_to_run: ["C", "I", "A"]
+
+analysis:
+  # Metric column from test_results.csv to plot on secondary axis
+  # Options: Reward, Resilience Drop
+  metric: Reward
+  # true: agent names follow training-time format ("Aligned RL 0.5 C agent")
+  # false: agent names follow test-time format ("RL-a0.5-C1 agent")
+  training_time: false
+  # true: recompute alignment scores from scenario CSVs
+  # false: load from cached all_alignment_scores.csv
+  recalculate: true
+  # Number of alpha values for analysis (do not need to plot all)
+  alpha_sampling_range: 5
+  # If calculating knee-point. Will export to a file kneepoint.csv in experiment_dir
+  # Note: Need to have a good number of alpha in the analysis file (num>=50 is ideal)
+  calculate_kneepoint: true
+  # Action space mapping file corresponding 
+  # to the scenario. Used to filter out Remove actions from the alignment score
+  # since these actions have some prereqs in the
+  # env in order for it to work (blue has to analyze the host before 
+  # being able to Remove) 
+  action_space_file: "CybORG/Shared/Scenarios/scalability_eval_scenarios/action_spaces/hosts_3.json"
