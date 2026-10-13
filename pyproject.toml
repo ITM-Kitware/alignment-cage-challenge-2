@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "CybORG"
+version = "2.1"
+description = "Adaptive policy shaping for autonomous cyber defense in CybORG CAGE 2"
+license = {text = "Apache-2.0"}
+requires-python = ">=3.10"
+dependencies = [
+    "pytest",
+    "paramiko",
+    "pyyaml",
+    "numpy",
+    "seaborn",
+    "adjusttext",
+    "prettytable",
+    "docutils",
+    "wandb",
+    "sb3-contrib",
+    "gymnasium",
+    "stable_baselines3",
+    "loguru",
+    "pandas",
+    "matplotlib",
+    "torch",
+    "tqdm",
+    "rich",
+    "networkx",
+]
+
+[tool.setuptools.packages.find]
+where = ["CybORG"]
+include = ["CybORG", "CybORG.*"]
+exclude = ["CybORG.Tests*"]
+
+[tool.setuptools.package-data]
+CybORG = ["version.txt", "Shared/Config/*.ini", "Shared/Scenarios/*.yaml", "Shared/Scenarios/**/*.yaml", "Shared/Scenarios/**/*.json"]
