@@ -1,0 +1,716 @@
+{
+  "action_space": [
+    {
+      "hostname": null,
+      "action": "Sleep"
+    },
+    {
+      "hostname": null,
+      "action": "Monitor"
+    },
+    {
+      "hostname": "User0",
+      "action": "Analyse"
+    },
+    {
+      "hostname": "User1",
+      "action": "Analyse"
+    },
+    {
+      "hostname": "User2",
+      "action": "Analyse"
+    },
+    {
+      "hostname": "User3",
+      "action": "Analyse"
+    },
+    {
+      "hostname": "User4",
+      "action": "Analyse"
+    },
+    {
+      "hostname": "Enterprise0",
+      "action": "Analyse"
+    },
+    {
+      "hostname": "Enterprise1",
+      "action": "Analyse"
+    },
+    {
+      "hostname": "Enterprise2",
+      "action": "Analyse"
+    },
+    {
+      "hostname": "Op_Server0",
+      "action": "Analyse"
+    },
+    {
+      "hostname": "Op_Host0",
+      "action": "Analyse"
+    },
+    {
+      "hostname": "Op_Host1",
+      "action": "Analyse"
+    },
+    {
+      "hostname": "Op_Host2",
+      "action": "Analyse"
+    },
+    {
+      "hostname": "Front0",
+      "action": "Analyse"
+    },
+    {
+      "hostname": "Auth0",
+      "action": "Analyse"
+    },
+    {
+      "hostname": "Database0",
+      "action": "Analyse"
+    },
+    {
+      "hostname": "Defender",
+      "action": "Analyse"
+    },
+    {
+      "hostname": "User0",
+      "action": "Remove"
+    },
+    {
+      "hostname": "User1",
+      "action": "Remove"
+    },
+    {
+      "hostname": "User2",
+      "action": "Remove"
+    },
+    {
+      "hostname": "User3",
+      "action": "Remove"
+    },
+    {
+      "hostname": "User4",
+      "action": "Remove"
+    },
+    {
+      "hostname": "Enterprise0",
+      "action": "Remove"
+    },
+    {
+      "hostname": "Enterprise1",
+      "action": "Remove"
+    },
+    {
+      "hostname": "Enterprise2",
+      "action": "Remove"
+    },
+    {
+      "hostname": "Op_Server0",
+      "action": "Remove"
+    },
+    {
+      "hostname": "Op_Host0",
+      "action": "Remove"
+    },
+    {
+      "hostname": "Op_Host1",
+      "action": "Remove"
+    },
+    {
+      "hostname": "Op_Host2",
+      "action": "Remove"
+    },
+    {
+      "hostname": "Front0",
+      "action": "Remove"
+    },
+    {
+      "hostname": "Auth0",
+      "action": "Remove"
+    },
+    {
+      "hostname": "Database0",
+      "action": "Remove"
+    },
+    {
+      "hostname": "Defender",
+      "action": "Remove"
+    },
+    {
+      "hostname": "User0",
+      "action": "DecoyApache"
+    },
+    {
+      "hostname": "User1",
+      "action": "DecoyApache"
+    },
+    {
+      "hostname": "User2",
+      "action": "DecoyApache"
+    },
+    {
+      "hostname": "User3",
+      "action": "DecoyApache"
+    },
+    {
+      "hostname": "User4",
+      "action": "DecoyApache"
+    },
+    {
+      "hostname": "Enterprise0",
+      "action": "DecoyApache"
+    },
+    {
+      "hostname": "Enterprise1",
+      "action": "DecoyApache"
+    },
+    {
+      "hostname": "Enterprise2",
+      "action": "DecoyApache"
+    },
+    {
+      "hostname": "Op_Server0",
+      "action": "DecoyApache"
+    },
+    {
+      "hostname": "Op_Host0",
+      "action": "DecoyApache"
+    },
+    {
+      "hostname": "Op_Host1",
+      "action": "DecoyApache"
+    },
+    {
+      "hostname": "Op_Host2",
+      "action": "DecoyApache"
+    },
+    {
+      "hostname": "Front0",
+      "action": "DecoyApache"
+    },
+    {
+      "hostname": "Auth0",
+      "action": "DecoyApache"
+    },
+    {
+      "hostname": "Database0",
+      "action": "DecoyApache"
+    },
+    {
+      "hostname": "Defender",
+      "action": "DecoyApache"
+    },
+    {
+      "hostname": "User0",
+      "action": "DecoyFemitter"
+    },
+    {
+      "hostname": "User1",
+      "action": "DecoyFemitter"
+    },
+    {
+      "hostname": "User2",
+      "action": "DecoyFemitter"
+    },
+    {
+      "hostname": "User3",
+      "action": "DecoyFemitter"
+    },
+    {
+      "hostname": "User4",
+      "action": "DecoyFemitter"
+    },
+    {
+      "hostname": "Enterprise0",
+      "action": "DecoyFemitter"
+    },
+    {
+      "hostname": "Enterprise1",
+      "action": "DecoyFemitter"
+    },
+    {
+      "hostname": "Enterprise2",
+      "action": "DecoyFemitter"
+    },
+    {
+      "hostname": "Op_Server0",
+      "action": "DecoyFemitter"
+    },
+    {
+      "hostname": "Op_Host0",
+      "action": "DecoyFemitter"
+    },
+    {
+      "hostname": "Op_Host1",
+      "action": "DecoyFemitter"
+    },
+    {
+      "hostname": "Op_Host2",
+      "action": "DecoyFemitter"
+    },
+    {
+      "hostname": "Front0",
+      "action": "DecoyFemitter"
+    },
+    {
+      "hostname": "Auth0",
+      "action": "DecoyFemitter"
+    },
+    {
+      "hostname": "Database0",
+      "action": "DecoyFemitter"
+    },
+    {
+      "hostname": "Defender",
+      "action": "DecoyFemitter"
+    },
+    {
+      "hostname": "User0",
+      "action": "DecoyHarakaSMPT"
+    },
+    {
+      "hostname": "User1",
+      "action": "DecoyHarakaSMPT"
+    },
+    {
+      "hostname": "User2",
+      "action": "DecoyHarakaSMPT"
+    },
+    {
+      "hostname": "User3",
+      "action": "DecoyHarakaSMPT"
+    },
+    {
+      "hostname": "User4",
+      "action": "DecoyHarakaSMPT"
+    },
+    {
+      "hostname": "Enterprise0",
+      "action": "DecoyHarakaSMPT"
+    },
+    {
+      "hostname": "Enterprise1",
+      "action": "DecoyHarakaSMPT"
+    },
+    {
+      "hostname": "Enterprise2",
+      "action": "DecoyHarakaSMPT"
+    },
+    {
+      "hostname": "Op_Server0",
+      "action": "DecoyHarakaSMPT"
+    },
+    {
+      "hostname": "Op_Host0",
+      "action": "DecoyHarakaSMPT"
+    },
+    {
+      "hostname": "Op_Host1",
+      "action": "DecoyHarakaSMPT"
+    },
+    {
+      "hostname": "Op_Host2",
+      "action": "DecoyHarakaSMPT"
+    },
+    {
+      "hostname": "Front0",
+      "action": "DecoyHarakaSMPT"
+    },
+    {
+      "hostname": "Auth0",
+      "action": "DecoyHarakaSMPT"
+    },
+    {
+      "hostname": "Database0",
+      "action": "DecoyHarakaSMPT"
+    },
+    {
+      "hostname": "Defender",
+      "action": "DecoyHarakaSMPT"
+    },
+    {
+      "hostname": "User0",
+      "action": "DecoySmss"
+    },
+    {
+      "hostname": "User1",
+      "action": "DecoySmss"
+    },
+    {
+      "hostname": "User2",
+      "action": "DecoySmss"
+    },
+    {
+      "hostname": "User3",
+      "action": "DecoySmss"
+    },
+    {
+      "hostname": "User4",
+      "action": "DecoySmss"
+    },
+    {
+      "hostname": "Enterprise0",
+      "action": "DecoySmss"
+    },
+    {
+      "hostname": "Enterprise1",
+      "action": "DecoySmss"
+    },
+    {
+      "hostname": "Enterprise2",
+      "action": "DecoySmss"
+    },
+    {
+      "hostname": "Op_Server0",
+      "action": "DecoySmss"
+    },
+    {
+      "hostname": "Op_Host0",
+      "action": "DecoySmss"
+    },
+    {
+      "hostname": "Op_Host1",
+      "action": "DecoySmss"
+    },
+    {
+      "hostname": "Op_Host2",
+      "action": "DecoySmss"
+    },
+    {
+      "hostname": "Front0",
+      "action": "DecoySmss"
+    },
+    {
+      "hostname": "Auth0",
+      "action": "DecoySmss"
+    },
+    {
+      "hostname": "Database0",
+      "action": "DecoySmss"
+    },
+    {
+      "hostname": "Defender",
+      "action": "DecoySmss"
+    },
+    {
+      "hostname": "User0",
+      "action": "DecoySSHD"
+    },
+    {
+      "hostname": "User1",
+      "action": "DecoySSHD"
+    },
+    {
+      "hostname": "User2",
+      "action": "DecoySSHD"
+    },
+    {
+      "hostname": "User3",
+      "action": "DecoySSHD"
+    },
+    {
+      "hostname": "User4",
+      "action": "DecoySSHD"
+    },
+    {
+      "hostname": "Enterprise0",
+      "action": "DecoySSHD"
+    },
+    {
+      "hostname": "Enterprise1",
+      "action": "DecoySSHD"
+    },
+    {
+      "hostname": "Enterprise2",
+      "action": "DecoySSHD"
+    },
+    {
+      "hostname": "Op_Server0",
+      "action": "DecoySSHD"
+    },
+    {
+      "hostname": "Op_Host0",
+      "action": "DecoySSHD"
+    },
+    {
+      "hostname": "Op_Host1",
+      "action": "DecoySSHD"
+    },
+    {
+      "hostname": "Op_Host2",
+      "action": "DecoySSHD"
+    },
+    {
+      "hostname": "Front0",
+      "action": "DecoySSHD"
+    },
+    {
+      "hostname": "Auth0",
+      "action": "DecoySSHD"
+    },
+    {
+      "hostname": "Database0",
+      "action": "DecoySSHD"
+    },
+    {
+      "hostname": "Defender",
+      "action": "DecoySSHD"
+    },
+    {
+      "hostname": "User0",
+      "action": "DecoySvchost"
+    },
+    {
+      "hostname": "User1",
+      "action": "DecoySvchost"
+    },
+    {
+      "hostname": "User2",
+      "action": "DecoySvchost"
+    },
+    {
+      "hostname": "User3",
+      "action": "DecoySvchost"
+    },
+    {
+      "hostname": "User4",
+      "action": "DecoySvchost"
+    },
+    {
+      "hostname": "Enterprise0",
+      "action": "DecoySvchost"
+    },
+    {
+      "hostname": "Enterprise1",
+      "action": "DecoySvchost"
+    },
+    {
+      "hostname": "Enterprise2",
+      "action": "DecoySvchost"
+    },
+    {
+      "hostname": "Op_Server0",
+      "action": "DecoySvchost"
+    },
+    {
+      "hostname": "Op_Host0",
+      "action": "DecoySvchost"
+    },
+    {
+      "hostname": "Op_Host1",
+      "action": "DecoySvchost"
+    },
+    {
+      "hostname": "Op_Host2",
+      "action": "DecoySvchost"
+    },
+    {
+      "hostname": "Front0",
+      "action": "DecoySvchost"
+    },
+    {
+      "hostname": "Auth0",
+      "action": "DecoySvchost"
+    },
+    {
+      "hostname": "Database0",
+      "action": "DecoySvchost"
+    },
+    {
+      "hostname": "Defender",
+      "action": "DecoySvchost"
+    },
+    {
+      "hostname": "User0",
+      "action": "DecoyTomcat"
+    },
+    {
+      "hostname": "User1",
+      "action": "DecoyTomcat"
+    },
+    {
+      "hostname": "User2",
+      "action": "DecoyTomcat"
+    },
+    {
+      "hostname": "User3",
+      "action": "DecoyTomcat"
+    },
+    {
+      "hostname": "User4",
+      "action": "DecoyTomcat"
+    },
+    {
+      "hostname": "Enterprise0",
+      "action": "DecoyTomcat"
+    },
+    {
+      "hostname": "Enterprise1",
+      "action": "DecoyTomcat"
+    },
+    {
+      "hostname": "Enterprise2",
+      "action": "DecoyTomcat"
+    },
+    {
+      "hostname": "Op_Server0",
+      "action": "DecoyTomcat"
+    },
+    {
+      "hostname": "Op_Host0",
+      "action": "DecoyTomcat"
+    },
+    {
+      "hostname": "Op_Host1",
+      "action": "DecoyTomcat"
+    },
+    {
+      "hostname": "Op_Host2",
+      "action": "DecoyTomcat"
+    },
+    {
+      "hostname": "Front0",
+      "action": "DecoyTomcat"
+    },
+    {
+      "hostname": "Auth0",
+      "action": "DecoyTomcat"
+    },
+    {
+      "hostname": "Database0",
+      "action": "DecoyTomcat"
+    },
+    {
+      "hostname": "Defender",
+      "action": "DecoyTomcat"
+    },
+    {
+      "hostname": "User0",
+      "action": "DecoyVsftpd"
+    },
+    {
+      "hostname": "User1",
+      "action": "DecoyVsftpd"
+    },
+    {
+      "hostname": "User2",
+      "action": "DecoyVsftpd"
+    },
+    {
+      "hostname": "User3",
+      "action": "DecoyVsftpd"
+    },
+    {
+      "hostname": "User4",
+      "action": "DecoyVsftpd"
+    },
+    {
+      "hostname": "Enterprise0",
+      "action": "DecoyVsftpd"
+    },
+    {
+      "hostname": "Enterprise1",
+      "action": "DecoyVsftpd"
+    },
+    {
+      "hostname": "Enterprise2",
+      "action": "DecoyVsftpd"
+    },
+    {
+      "hostname": "Op_Server0",
+      "action": "DecoyVsftpd"
+    },
+    {
+      "hostname": "Op_Host0",
+      "action": "DecoyVsftpd"
+    },
+    {
+      "hostname": "Op_Host1",
+      "action": "DecoyVsftpd"
+    },
+    {
+      "hostname": "Op_Host2",
+      "action": "DecoyVsftpd"
+    },
+    {
+      "hostname": "Front0",
+      "action": "DecoyVsftpd"
+    },
+    {
+      "hostname": "Auth0",
+      "action": "DecoyVsftpd"
+    },
+    {
+      "hostname": "Database0",
+      "action": "DecoyVsftpd"
+    },
+    {
+      "hostname": "Defender",
+      "action": "DecoyVsftpd"
+    },
+    {
+      "hostname": "User0",
+      "action": "Restore"
+    },
+    {
+      "hostname": "User1",
+      "action": "Restore"
+    },
+    {
+      "hostname": "User2",
+      "action": "Restore"
+    },
+    {
+      "hostname": "User3",
+      "action": "Restore"
+    },
+    {
+      "hostname": "User4",
+      "action": "Restore"
+    },
+    {
+      "hostname": "Enterprise0",
+      "action": "Restore"
+    },
+    {
+      "hostname": "Enterprise1",
+      "action": "Restore"
+    },
+    {
+      "hostname": "Enterprise2",
+      "action": "Restore"
+    },
+    {
+      "hostname": "Op_Server0",
+      "action": "Restore"
+    },
+    {
+      "hostname": "Op_Host0",
+      "action": "Restore"
+    },
+    {
+      "hostname": "Op_Host1",
+      "action": "Restore"
+    },
+    {
+      "hostname": "Op_Host2",
+      "action": "Restore"
+    },
+    {
+      "hostname": "Front0",
+      "action": "Restore"
+    },
+    {
+      "hostname": "Auth0",
+      "action": "Restore"
+    },
+    {
+      "hostname": "Database0",
+      "action": "Restore"
+    },
+    {
+      "hostname": "Defender",
+      "action": "Restore"
+    }
+  ]
+}

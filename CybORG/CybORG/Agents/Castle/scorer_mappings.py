@@ -1,0 +1,80 @@
+from CybORG.Agents.Castle.impact_reporters import (
+    IMPACT_NONE,
+    IMPACT_AUTH,
+    IMPACT_DATABASE,
+    IMPACT_FRONT,
+)
+
+# the original scoring 
+CONF_MAP_ORIGINAL = {
+    IMPACT_NONE: 0.0,
+    IMPACT_AUTH: 10.0,
+    IMPACT_DATABASE: 10.0,
+    IMPACT_FRONT: 0.0,
+}
+
+INTEG_MAP_ORIGINAL = {
+    IMPACT_NONE: 0.0,
+    IMPACT_AUTH: 10.0,
+    IMPACT_DATABASE: 0.0,
+    IMPACT_FRONT: 10.0,
+}
+
+AVAIL_MAP_ORIGINAL = {
+    IMPACT_NONE: 0.0,
+    IMPACT_AUTH: 10.0,
+    IMPACT_DATABASE: 10.0,
+    IMPACT_FRONT: 10.0,
+}
+
+# another scoring setup
+CONF_MAP_V2 = {
+    IMPACT_NONE: 0.0,
+    IMPACT_AUTH: 50.0,
+    IMPACT_DATABASE: 0.0,
+    IMPACT_FRONT: 0.0,
+}
+
+INTEG_MAP_V2 = {
+    IMPACT_NONE: 0.0,
+    IMPACT_AUTH: 10.0,
+    IMPACT_DATABASE: 0.0,
+    IMPACT_FRONT: 5,
+}
+
+AVAIL_MAP_V2 = {
+    IMPACT_NONE: 0.0,
+    IMPACT_AUTH: 10.0,
+    IMPACT_DATABASE: 10.0,
+    IMPACT_FRONT: 10.0,
+}
+
+# another scoring setup
+CONF_MAP_V3 = {
+    IMPACT_NONE: 0.0,
+    IMPACT_AUTH: 20.0,
+    IMPACT_DATABASE: 10.0,
+    IMPACT_FRONT: 0.0,
+}
+
+INTEG_MAP_V3 = {
+    IMPACT_NONE: 0.0,
+    IMPACT_AUTH: 20.0,
+    IMPACT_DATABASE: 0.0,
+    IMPACT_FRONT: 10.0,
+}
+
+AVAIL_MAP_V3 = {
+    IMPACT_NONE: 0.0,
+    IMPACT_AUTH: 20.0,
+    IMPACT_DATABASE: 10.0,
+    IMPACT_FRONT: 10.0,
+}
+
+AVAIL_MAP_V4 = {
+    IMPACT_NONE: 0.0,
+    IMPACT_AUTH: 1.0,
+    IMPACT_DATABASE: 1.0,
+    IMPACT_FRONT: 1.0,
+}
+

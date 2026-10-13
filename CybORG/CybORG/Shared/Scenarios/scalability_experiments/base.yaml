@@ -1,0 +1,765 @@
+Agents:
+  Red:
+    agent_type: SleepAgent
+    wrappers: []
+    actions:
+    - Sleep
+    - DiscoverRemoteSystems
+    - DiscoverNetworkServices
+    - ExploitRemoteService
+    - BlueKeep
+    - EternalBlue
+    - FTPDirectoryTraversal
+    - HarakaRCE
+    - HTTPRFI
+    - HTTPSRFI
+    - SQLInjection
+    - PrivilegeEscalate
+    - Impact
+    - SSHBruteForce
+    starting_sessions:
+    - username: SYSTEM
+      hostname: User2
+      type: RedAbstractSession
+      name: RedPhish
+    reward_calculator_type: HybridImpactPwn
+    INT:
+      Hosts:
+        User2:
+          Interfaces: All
+          System info: All
+    AllowedSubnets:
+    - User
+    - Enterprise
+    - Operational
+  Blue:
+    agent_type: SleepAgent
+    wrappers: []
+    actions:
+    - Sleep
+    - Monitor
+    - Analyse
+    - Remove
+    - DecoyApache
+    - DecoyFemitter
+    - DecoyHarakaSMPT
+    - DecoySmss
+    - DecoySSHD
+    - DecoySvchost
+    - DecoyTomcat
+    - DecoyVsftpd
+    - Restore
+    starting_sessions:
+    - hostname: Defender
+      name: VeloServer
+      type: VelociraptorServer
+      username: ubuntu
+      num_children_sessions: 2
+      artifacts:
+      - NetworkConnections
+      - ProcessCreation
+    - hostname: User0
+      name: VeloUser0
+      type: VelociraptorClient
+      username: ubuntu
+      parent: VeloServer
+    - hostname: User1
+      name: VeloUser1
+      type: VelociraptorClient
+      username: ubuntu
+      parent: VeloServer
+    - hostname: User2
+      name: VeloUser2
+      type: VelociraptorClient
+      username: ubuntu
+      parent: VeloServer
+    - hostname: User3
+      name: VeloUser3
+      type: VelociraptorClient
+      username: ubuntu
+      parent: VeloServer
+    - hostname: User4
+      name: VeloUser4
+      type: VelociraptorClient
+      username: ubuntu
+      parent: VeloServer
+    - hostname: Enterprise0
+      name: VeloEnterprise0
+      type: VelociraptorClient
+      username: ubuntu
+      parent: VeloServer
+    - hostname: Enterprise1
+      name: VeloEnterprise1
+      type: VelociraptorClient
+      username: ubuntu
+      parent: VeloServer
+    - hostname: Enterprise2
+      name: VeloEnterprise2
+      type: VelociraptorClient
+      username: ubuntu
+      parent: VeloServer
+    - hostname: Op_Server0
+      name: VeloOp_Server0
+      type: VelociraptorClient
+      username: ubuntu
+      parent: VeloServer
+    - hostname: Op_Host0
+      name: VeloOp_Host0
+      type: VelociraptorClient
+      username: ubuntu
+      parent: VeloServer
+    - hostname: Op_Host1
+      name: VeloOp_Host1
+      type: VelociraptorClient
+      username: ubuntu
+      parent: VeloServer
+    - hostname: Op_Host2
+      name: VeloOp_Host2
+      type: VelociraptorClient
+      username: ubuntu
+      parent: VeloServer
+    - hostname: Front0
+      name: VeloFront0
+      type: VelociraptorClient
+      username: ubuntu
+      parent: VeloServer
+    - hostname: Auth0
+      name: VeloAuth0
+      type: VelociraptorClient
+      username: ubuntu
+      parent: VeloServer
+    - hostname: Database0
+      name: VeloDatabase0
+      type: VelociraptorClient
+      username: ubuntu
+      parent: VeloServer
+    - hostname: Defender
+      name: VeloDefender
+      type: VelociraptorClient
+      username: ubuntu
+      parent: VeloServer
+    reward_calculator_type: AlignedReward
+    INT:
+      Hosts:
+        User0:
+          Interfaces: All
+          System info: All
+          User info: All
+        User1:
+          Interfaces: All
+          System info: All
+          User info: All
+        User2:
+          Interfaces: All
+          System info: All
+          User info: All
+        User3:
+          Interfaces: All
+          System info: All
+          User info: All
+        User4:
+          Interfaces: All
+          System info: All
+          User info: All
+        Enterprise0:
+          Interfaces: All
+          System info: All
+          User info: All
+        Enterprise1:
+          Interfaces: All
+          System info: All
+          User info: All
+        Enterprise2:
+          Interfaces: All
+          System info: All
+          User info: All
+        Op_Server0:
+          Interfaces: All
+          System info: All
+          User info: All
+        Op_Host0:
+          Interfaces: All
+          System info: All
+          User info: All
+        Op_Host1:
+          Interfaces: All
+          System info: All
+          User info: All
+        Op_Host2:
+          Interfaces: All
+          System info: All
+          User info: All
+        Front0:
+          Interfaces: All
+          System info: All
+          User info: All
+        Auth0:
+          Interfaces: All
+          System info: All
+          User info: All
+        Database0:
+          Interfaces: All
+          System info: All
+          User info: All
+        Defender:
+          Interfaces: All
+          System info: All
+          User info: All
+    AllowedSubnets:
+    - User
+    - Enterprise
+    - Operational
+    adversary: Red
+  Green:
+    agent_type: SleepAgent
+    wrappers: []
+    actions:
+    - Sleep
+    - GreenPingSweep
+    - GreenPortScan
+    - GreenConnection
+    starting_sessions:
+    - username: GreenAgent
+      hostname: User0
+      type: green_session
+      name: GreenSession
+    - username: GreenAgent
+      hostname: User1
+      type: green_session
+      name: GreenSession
+    - username: GreenAgent
+      hostname: User2
+      type: green_session
+      name: GreenSession
+    - username: GreenAgent
+      hostname: User3
+      type: green_session
+      name: GreenSession
+    - username: GreenAgent
+      hostname: User4
+      type: green_session
+      name: GreenSession
+    - username: GreenAgent
+      hostname: Enterprise0
+      type: green_session
+      name: GreenSession
+    - username: GreenAgent
+      hostname: Enterprise1
+      type: green_session
+      name: GreenSession
+    - username: GreenAgent
+      hostname: Enterprise2
+      type: green_session
+      name: GreenSession
+    - username: GreenAgent
+      hostname: Op_Server0
+      type: green_session
+      name: GreenSession
+    - username: GreenAgent
+      hostname: Op_Host0
+      type: green_session
+      name: GreenSession
+    - username: GreenAgent
+      hostname: Op_Host1
+      type: green_session
+      name: GreenSession
+    - username: GreenAgent
+      hostname: Op_Host2
+      type: green_session
+      name: GreenSession
+    - username: GreenAgent
+      hostname: Front0
+      type: green_session
+      name: GreenSession
+    - username: GreenAgent
+      hostname: Auth0
+      type: green_session
+      name: GreenSession
+    - username: GreenAgent
+      hostname: Database0
+      type: green_session
+      name: GreenSession
+    reward_calculator_type: None
+    INT:
+      Hosts:
+        User0:
+          Interfaces: All
+          System info: All
+          User info: All
+        User1:
+          Interfaces: All
+          System info: All
+          User info: All
+        User2:
+          Interfaces: All
+          System info: All
+          User info: All
+        User3:
+          Interfaces: All
+          System info: All
+          User info: All
+        User4:
+          Interfaces: All
+          System info: All
+          User info: All
+        Enterprise0:
+          Interfaces: All
+          System info: All
+          User info: All
+        Enterprise1:
+          Interfaces: All
+          System info: All
+          User info: All
+        Enterprise2:
+          Interfaces: All
+          System info: All
+          User info: All
+        Op_Server0:
+          Interfaces: All
+          System info: All
+          User info: All
+        Op_Host0:
+          Interfaces: All
+          System info: All
+          User info: All
+        Op_Host1:
+          Interfaces: All
+          System info: All
+          User info: All
+        Op_Host2:
+          Interfaces: All
+          System info: All
+          User info: All
+        Front0:
+          Interfaces: All
+          System info: All
+          User info: All
+        Auth0:
+          Interfaces: All
+          System info: All
+          User info: All
+        Database0:
+          Interfaces: All
+          System info: All
+          User info: All
+    AllowedSubnets:
+    - User
+    - Enterprise
+    - Operational
+Hosts:
+  User0:
+    image: Internal
+    AWS_Info: []
+    ConfidentialityValue: Medium
+    AvailabilityValue: Medium
+    subnet: User
+    Type: User
+    info:
+      User0:
+        Interfaces: All
+      Enterprise0:
+        Interfaces: IP Address
+      Enterprise2:
+        Interfaces: IP Address
+      Enterprise1:
+        Interfaces: IP Address
+  User1:
+    image: Gateway
+    AWS_Info: []
+    ConfidentialityValue: Medium
+    AvailabilityValue: Medium
+    subnet: User
+    Type: User
+    info:
+      User1:
+        Interfaces: All
+      Enterprise2:
+        Interfaces: IP Address
+      Enterprise1:
+        Interfaces: IP Address
+      Enterprise0:
+        Interfaces: IP Address
+  User2:
+    image: Gateway
+    AWS_Info: []
+    ConfidentialityValue: Medium
+    AvailabilityValue: Medium
+    subnet: User
+    Type: User
+    info:
+      User2:
+        Interfaces: All
+      Enterprise0:
+        Interfaces: IP Address
+      Enterprise1:
+        Interfaces: IP Address
+      Enterprise2:
+        Interfaces: IP Address
+  User3:
+    image: Gateway
+    AWS_Info: []
+    ConfidentialityValue: Medium
+    AvailabilityValue: Medium
+    subnet: User
+    Type: User
+    info:
+      User3:
+        Interfaces: All
+      Enterprise1:
+        Interfaces: IP Address
+      Enterprise0:
+        Interfaces: IP Address
+      Enterprise2:
+        Interfaces: IP Address
+  User4:
+    image: Internal
+    AWS_Info: []
+    ConfidentialityValue: Medium
+    AvailabilityValue: Medium
+    subnet: User
+    Type: User
+    info:
+      User4:
+        Interfaces: All
+      Enterprise1:
+        Interfaces: IP Address
+      Enterprise0:
+        Interfaces: IP Address
+      Enterprise2:
+        Interfaces: IP Address
+  Enterprise0:
+    image: InternalOT
+    AWS_Info: []
+    ConfidentialityValue: High
+    AvailabilityValue: High
+    subnet: Enterprise
+    Type: Enterprise
+    info:
+      Enterprise0:
+        Interfaces: All
+        Services:
+        - OTService
+      User0:
+        Interfaces: IP Address
+      User1:
+        Interfaces: IP Address
+      User2:
+        Interfaces: IP Address
+      User3:
+        Interfaces: IP Address
+      User4:
+        Interfaces: IP Address
+      Enterprise1:
+        Interfaces: IP Address
+      Enterprise2:
+        Interfaces: IP Address
+      Op_Server0:
+        Interfaces: IP Address
+      Op_Host0:
+        Interfaces: IP Address
+      Op_Host1:
+        Interfaces: IP Address
+      Op_Host2:
+        Interfaces: IP Address
+      Front0:
+        Interfaces: IP Address
+      Auth0:
+        Interfaces: IP Address
+      Database0:
+        Interfaces: IP Address
+  Enterprise1:
+    image: InternalOT
+    AWS_Info: []
+    ConfidentialityValue: High
+    AvailabilityValue: High
+    subnet: Enterprise
+    Type: Enterprise
+    info:
+      Enterprise1:
+        Interfaces: All
+        Services:
+        - OTService
+      User0:
+        Interfaces: IP Address
+      User1:
+        Interfaces: IP Address
+      User2:
+        Interfaces: IP Address
+      User3:
+        Interfaces: IP Address
+      User4:
+        Interfaces: IP Address
+      Enterprise0:
+        Interfaces: IP Address
+      Enterprise2:
+        Interfaces: IP Address
+      Op_Server0:
+        Interfaces: IP Address
+      Op_Host0:
+        Interfaces: IP Address
+      Op_Host1:
+        Interfaces: IP Address
+      Op_Host2:
+        Interfaces: IP Address
+      Front0:
+        Interfaces: IP Address
+      Auth0:
+        Interfaces: IP Address
+      Database0:
+        Interfaces: IP Address
+  Enterprise2:
+    image: InternalOT
+    AWS_Info: []
+    ConfidentialityValue: High
+    AvailabilityValue: High
+    subnet: Enterprise
+    Type: Enterprise
+    info:
+      Enterprise2:
+        Interfaces: All
+        Services:
+        - OTService
+      User0:
+        Interfaces: IP Address
+      User1:
+        Interfaces: IP Address
+      User2:
+        Interfaces: IP Address
+      User3:
+        Interfaces: IP Address
+      User4:
+        Interfaces: IP Address
+      Enterprise0:
+        Interfaces: IP Address
+      Enterprise1:
+        Interfaces: IP Address
+      Op_Server0:
+        Interfaces: IP Address
+      Op_Host0:
+        Interfaces: IP Address
+      Op_Host1:
+        Interfaces: IP Address
+      Op_Host2:
+        Interfaces: IP Address
+      Front0:
+        Interfaces: IP Address
+      Auth0:
+        Interfaces: IP Address
+      Database0:
+        Interfaces: IP Address
+  Op_Server0:
+    image: OP_Server
+    AWS_Info: []
+    ConfidentialityValue: Medium
+    AvailabilityValue: Medium
+    subnet: Operational
+    Type: Op_Server
+    info:
+      Op_Server0:
+        Interfaces: All
+        Services:
+        - OTService
+      Op_Host0:
+        Interfaces: IP Address
+      Op_Host1:
+        Interfaces: IP Address
+      Op_Host2:
+        Interfaces: IP Address
+      Front0:
+        Interfaces: IP Address
+      Auth0:
+        Interfaces: IP Address
+      Database0:
+        Interfaces: IP Address
+  Op_Host0:
+    image: GatewayOT
+    AWS_Info: []
+    ConfidentialityValue: Medium
+    AvailabilityValue: Medium
+    subnet: Operational
+    Type: Op_Host
+    info:
+      Op_Host0:
+        Interfaces: All
+        Services:
+        - OTService
+      Op_Server0:
+        Interfaces: IP Address
+      Op_Host1:
+        Interfaces: IP Address
+      Op_Host2:
+        Interfaces: IP Address
+      Front0:
+        Interfaces: IP Address
+      Auth0:
+        Interfaces: IP Address
+      Database0:
+        Interfaces: IP Address
+  Op_Host1:
+    image: GatewayOT
+    AWS_Info: []
+    ConfidentialityValue: Medium
+    AvailabilityValue: Medium
+    subnet: Operational
+    Type: Op_Host
+    info:
+      Op_Host1:
+        Interfaces: All
+        Services:
+        - OTService
+      Op_Server0:
+        Interfaces: IP Address
+      Op_Host0:
+        Interfaces: IP Address
+      Op_Host2:
+        Interfaces: IP Address
+      Front0:
+        Interfaces: IP Address
+      Auth0:
+        Interfaces: IP Address
+      Database0:
+        Interfaces: IP Address
+  Op_Host2:
+    image: GatewayOT
+    AWS_Info: []
+    ConfidentialityValue: Medium
+    AvailabilityValue: Medium
+    subnet: Operational
+    Type: Op_Host
+    info:
+      Op_Host2:
+        Interfaces: All
+        Services:
+        - OTService
+      Op_Server0:
+        Interfaces: IP Address
+      Op_Host0:
+        Interfaces: IP Address
+      Op_Host1:
+        Interfaces: IP Address
+      Front0:
+        Interfaces: IP Address
+      Auth0:
+        Interfaces: IP Address
+      Database0:
+        Interfaces: IP Address
+  Front0:
+    image: OP_Server
+    AWS_Info: []
+    ConfidentialityValue: None
+    AvailabilityValue: None
+    subnet: Operational
+    Type: Front
+    info:
+      Front0:
+        Interfaces: All
+        Services:
+        - OTService
+      Auth0:
+        Interfaces: IP Address
+      Database0:
+        Interfaces: IP Address
+      Op_Server0:
+        Interfaces: IP Address
+      Op_Host0:
+        Interfaces: IP Address
+      Op_Host1:
+        Interfaces: IP Address
+      Op_Host2:
+        Interfaces: IP Address
+  Auth0:
+    image: OP_Server
+    AWS_Info: []
+    ConfidentialityValue: None
+    AvailabilityValue: None
+    subnet: Operational
+    Type: Auth
+    info:
+      Auth0:
+        Interfaces: All
+        Services:
+        - OTService
+      Front0:
+        Interfaces: IP Address
+      Database0:
+        Interfaces: IP Address
+      Op_Server0:
+        Interfaces: IP Address
+      Op_Host0:
+        Interfaces: IP Address
+      Op_Host1:
+        Interfaces: IP Address
+      Op_Host2:
+        Interfaces: IP Address
+  Database0:
+    image: OP_Server
+    AWS_Info: []
+    ConfidentialityValue: None
+    AvailabilityValue: None
+    subnet: Operational
+    Type: Database
+    info:
+      Database0:
+        Interfaces: All
+        Services:
+        - OTService
+      Front0:
+        Interfaces: IP Address
+      Auth0:
+        Interfaces: IP Address
+      Op_Server0:
+        Interfaces: IP Address
+      Op_Host0:
+        Interfaces: IP Address
+      Op_Host1:
+        Interfaces: IP Address
+      Op_Host2:
+        Interfaces: IP Address
+  Defender:
+    image: Velociraptor_Server
+    AWS_Info: []
+    ConfidentialityValue: None
+    AvailabilityValue: None
+    subnet: Enterprise
+    Type: Defender
+    info:
+      Defender:
+        Interfaces: All
+Subnets:
+  Enterprise:
+    Hosts:
+    - Enterprise0
+    - Enterprise1
+    - Enterprise2
+    - Defender
+    Size: 3
+    NACLs:
+      all:
+        in: all
+        out: all
+  Operational:
+    Hosts:
+    - Op_Server0
+    - Op_Host0
+    - Op_Host1
+    - Op_Host2
+    - Front0
+    - Auth0
+    - Database0
+    Size: 7
+    NACLs:
+      all:
+        in: all
+        out: all
+  User:
+    Hosts:
+    - User0
+    - User1
+    - User2
+    - User3
+    - User4
+    Size: 5
+    NACLs:
+      all:
+        in: all
+        out: all
