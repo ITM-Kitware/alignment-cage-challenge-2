@@ -1,19 +1,54 @@
 # Alignment of Autonomous Cyber Defense Agents via Adaptive Policy Shaping
 
-Code for our paper **Alignment of Autonomous Cyber Defense Agents via Adaptive Policy Shaping**. This repository extends the CybORG CAGE Challenge 2 to study how autonomous defenders can be steered towards operational priorities while retaining their ability of general defense of the network.
-
+Code for our paper **Alignment of Autonomous Cyber Defense Agents via Adaptive Policy Shaping**. This repository extends CybORG CAGE Challenge 2 to study how autonomous defenders can be steered towards operational priorities while retaining their ability to defend the network.
 
 ## Differences from the original CybORG CAGE Challenge 2
 
-The original CAGE 2 challenge evaluates blue defenders against built-in red agents using the CAGE reward. This modified version adds:
+The original CAGE 2 challenge evaluates blue defenders against built-in red agents using the CAGE reward. This modified version adds operational objectives, modified attacker policies, and alignment methods for blue defenders. The simulator and experiment scripts remain in the `CybORG/` layout. The [original CAGE 2 guide](docs/CAGE2.md) retains the original challenge description.
 
-- **Operational objectives:** authentication, database, and front-end servers with CIA importance weights, attribute predictors, and resilience metrics. CIA-critical assets are excluded from the ordinary blue reward so that operational alignment and CAGE performance can be studied separately.
-- **Alignment methods:** PPO blue agents, training-time alignment rewards, fixed test-time policy interpolation, and adaptive policy shaping.
-- **Configurable scale:** scenario generation and experiments with 16, 31, 46, and 61 hosts; extended host addressing and action spaces support larger topologies.
-- **Paper adversaries:** meandering attackers targeting CIA assets or CAGE assets, and B-line attackers targeting individual CIA priorities. Training uses a mixed meandering attacker.
-- **Experiment tooling:** five-seed evaluation, trajectory and action-score exports, alignment analysis, trade-off plots, and optional Weights & Biases logging. The RL interfaces use Gymnasium.
+### Modified scenario and resilience metrics
 
-The simulator and experiment scripts remain in their existing `CybORG/` layout. The [original CAGE 2 guide](docs/CAGE2.md) retains the original challenge description and upstream references.
+The modified network includes authentication (`Auth`), database (`Database`), and front-end (`Front`) servers in addition to the user, enterprise, operational, and defender hosts. These servers represent operational priorities expressed through confidentiality (C), integrity (I), and availability (A):
+
+| Server type | Operational priorities |
+| --- | --- |
+| Authentication (`Auth`) | Confidentiality, integrity, availability |
+| Database (`Database`) | Confidentiality, availability |
+| Front-end (`Front`) | Integrity, availability |
+
+Resilience scoring is adapted from Cadet et al. **[Quantitative Resilience Modeling for Autonomous Cyber Defense](https://rlj.cs.umass.edu/2025/papers/Paper99.html)**. The implementation builds on the associated [CyberResilience code](https://github.com/xcadet/CyberResilience).
+
+
+Our [resilience metric](CybORG/CybORG/AlignmentMetric/resilience_measure.py) records CIA drops at each step and combines them into a normalized resilience drop, with default weights of 0.6 for confidentiality, 0.2 for integrity, and 0.2 for availability. It also scores candidate blue actions for the attribute-based policy and alignment analysis. The generated scenarios assign CIA-critical servers zero ordinary CAGE host reward values, allowing operational alignment and general network defense performance to be evaluated separately.
+
+Additional internal changes made to the CAGE 2 codebase are detailed in [experiment README](CybORG/experiment_configs/README.md#differences-from-the-original-cage-2).
+
+### CAGE 2 red agent modifications
+
+The original Meander and B-line attackers are extended to target the added operational servers and support host names across the generated network sizes. Evaluation uses five adversaries:
+
+| Paper adversary | Python class | Impact targets |
+| --- | --- | --- |
+| M-CIA | `RedMeanderAgent_Combination_CIA` | CIA-critical `Auth`, `Database`, and `Front` servers |
+| M-CAGE | `RedMeanderAgent_Combination_CAGE` | Other eligible compromised hosts contributing to CAGE performance |
+| Bline-C | `B_lineAgent_Resilience_C` | `Auth` or `Database` servers |
+| Bline-I | `B_lineAgent_Resilience_I` | `Auth` or `Front` servers |
+| Bline-A | `B_lineAgent_Resilience_A` | `Auth`, `Database`, or `Front` servers |
+
+Training uses `RedMeanderAgent_Combination`, which selects between CIA and CAGE impact targets with equal probability at each impact-selection decision. The B-line variants select a target server type once per episode and resolve matching hosts from observations. See [Meander_Resilience.py](CybORG/CybORG/Agents/SimpleAgents/Meander_Resilience.py) and [B_line_resilience.py](CybORG/CybORG/Agents/SimpleAgents/B_line_resilience.py).
+
+
+## Installation
+
+Use Python 3.10 or newer and [install uv](https://docs.astral.sh/uv/getting-started/installation/). From the repository root:
+
+```bash
+uv sync
+cd CybORG
+```
+
+`uv sync` creates the project environment and installs CybORG and its dependencies. Run scripts with `uv run ...` and shell launchers with `uv run bash ...`; manual environment activation is not required.
+
 
 ## Repository experiment scripts
 
@@ -25,52 +60,123 @@ The simulator and experiment scripts remain in their existing `CybORG/` layout. 
 | `CybORG/test_experiment.py` | Evaluate baseline, fixed, and adaptive policies |
 | `CybORG/test_experiment_training_time.py` | Evaluate agents aligned during training |
 | `CybORG/alignment_analysis.py` | Compute alignment scores and analyze reward trade-offs |
-| `CybORG/plot_*.py` | Plot gameplay, training curves, and method comparisons |
-| `docs/RELEASE_REVIEW.md` | Artifact availability and remaining reproduction checks |
+| `CybORG/CybORG/Shared/Scenarios/scenario_generation.py` | Generate scenarios with configurable host populations and reward settings |
 
-## Installation
+## Training
 
-Use Python 3.10 or newer. From this repository's root:
+Use [train_agents.py](CybORG/train_agents.py) to train a PPO defender against the mixed meandering attacker. `PPOAgent` trains the baseline; `AlignedPPOAgent` adds a reward term for the selected CIA attribute. The training-time bonus is called lambda in the paper and `alpha` in the CLI only; it is separate from the test-time interpolation weight.
 
-```bash
-python -m pip install uv
-uv venv .venv
-source .venv/bin/activate
-uv pip install -e .
-cd CybORG
-```
-
-Run the Python experiment commands below from `CybORG/`. Configuration paths are relative to that directory. Shell launchers locate it from their own location and use the active Python environment. No particular checkout location, shared drive, or user account is required.
-
-## Training and evaluation
-
-**Pretrained checkpoints:** Checkpoints will need to be trained first. Training configuration files are provided in the `CybORG/experiment_configs` folder. Training scripts are also provided below:
-
-The complete baseline and training-time sweeps are:
+To train one baseline checkpoint for `base`:
 
 ```bash
-bash experiment_configs/train_agents/train_base.sh
-bash experiment_configs/train_agents/train_trainingtime_alignment.sh
+uv run python train_agents.py \
+  --scenario scalability_experiments/base \
+  --agent_type PPOAgent \
+  --red_agent RedMeanderAgent_Combination \
+  --alpha 0 --seed 0 --game_steps 200 --training_iter 500000 \
+  --agent_export checkpoints/PPO_base_0_seed0
 ```
 
-These scripts cover four network sizes and training seeds `0 1 2 3 4`. Training budgets are 500,000, 1,000,000, 1,500,000, and 2,000,000 steps, respectively. Reward-shaped agents additionally sweep C, I, A and bonuses 0.5 through 3.0. These are substantial training jobs. To select a smaller run, set `CAGE_SCENARIOS`, `CAGE_TRAIN_SEEDS`, `CAGE_ATTRIBUTES`, or `CAGE_ALPHAS` as space-separated values before invoking a launcher.
-
-After training, run an individual experiment and its analysis:
+To train a defender aligned to confidentiality with a bonus of 1.5:
 
 ```bash
-python test_experiment.py --config experiment_configs/base.yaml
-python alignment_analysis.py --config experiment_configs/base.yaml
-python test_experiment.py --config experiment_configs/adaptive_alpha_config/base/cia.yaml
-python test_experiment_training_time.py --config experiment_configs/training_time_config/base.yaml
+uv run python train_agents.py \
+  --scenario scalability_experiments/base \
+  --agent_type AlignedPPOAgent \
+  --red_agent RedMeanderAgent_Combination \
+  --alignment_attribute C --alpha 1.5 \
+  --seed 0 --game_steps 200 --training_iter 500000 \
+  --agent_export checkpoints/PPO_base_1.5_C_seed0
 ```
 
-Checkpoints are written under `CybORG/checkpoints/`; experiment results under `CybORG/results/experiments/`. These generated artifacts are ignored by Git. Action-space mappings already reside beside the evaluation scenarios and can be regenerated with `python export_action_space_mapping.py` without a trained checkpoint.
+For the complete training sweeps:
 
+```bash
+uv run bash experiment_configs/train_agents/train_base.sh
+uv run bash experiment_configs/train_agents/train_trainingtime_alignment.sh
+```
+
+These launchers cover `base`, `hosts_2`, `hosts_3`, and `hosts_4` with training seeds `0 1 2 3 4`. Checkpoints are saved under `CybORG/checkpoints/` as `PPO_{scenario}_0_seed{seed}.zip` for baselines and `PPO_{scenario}_{bonus}_{attribute}_seed{seed}.zip` for reward-shaped agents. After saving a checkpoint, `train_agents.py` also runs a short evaluation. Logging is disabled by default; add `--wandb` to a Python training command to enable.
+
+## Evaluation and analysis
+
+Evaluation scripts load trained checkpoints and run the agents against the configured red adversary. The supplied configurations use 100 episodes, an evaluation seed starting at 42, and five training seeds. Episode horizons are 200, 300, 400, and 500 steps for `base`, `hosts_2`, `hosts_3`, and `hosts_4`, respectively.
+
+[test_experiment.py](CybORG/test_experiment.py) evaluates Blue Monitor and PPO baselines alongside fixed or adaptive test-time alignment:
+
+```bash
+# Baselines and fixed test-time interpolation
+uv run python test_experiment.py --config experiment_configs/base.yaml
+uv run python alignment_analysis.py --config experiment_configs/base.yaml
+
+# Adaptive test-time policy selection
+uv run python test_experiment.py --config experiment_configs/adaptive_alpha_config/base/cia.yaml
+uv run python alignment_analysis.py --config experiment_configs/adaptive_alpha_config/base/cia.yaml
+```
+
+[test_experiment_training_time.py](CybORG/test_experiment_training_time.py) evaluates the reward-shaped checkpoints:
+
+```bash
+uv run python test_experiment_training_time.py --config experiment_configs/training_time_config/base.yaml
+uv run python alignment_analysis.py --config experiment_configs/training_time_config/base.yaml
+```
+
+Train all checkpoints requested by a configuration before running it. To run the full evaluation and analysis sweeps:
+
+```bash
+uv run bash experiment_configs/run_all.sh
+uv run bash experiment_configs/run_training_time_experiments.sh
+uv run bash experiment_configs/export_alignment_analysis.sh
+```
+
+See the [configuration guide](CybORG/experiment_configs/README.md) for the method and adversary configuration.
+
+
+## Scenario generation
+
+Generated scenarios are already included, so generation is not required to run the supplied experiments:
+
+- [Training scenarios](CybORG/CybORG/Shared/Scenarios/scalability_experiments/) are in `CybORG/CybORG/Shared/Scenarios/scalability_experiments/` and use `AlignedReward` for blue agents.
+- [Evaluation scenarios](CybORG/CybORG/Shared/Scenarios/scalability_eval_scenarios/) are in `CybORG/CybORG/Shared/Scenarios/scalability_eval_scenarios/` and use `HybridAvailabilityConfidentiality` to measure ordinary CAGE performance.
+
+Both folders contain the following paper scenarios. Each has three subnets (User, Enterprise, and Operational); totals include one defender host. Operational hosts below count `Op_Server` and `Op_Host` together, separately from the CIA-critical servers.
+
+| Scenario file | User hosts | Enterprise hosts | Operational hosts | Auth | Database | Front | Defender | Total hosts |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| `base.yaml` | 5 | 3 | 4 | 1 | 1 | 1 | 1 | 16 |
+| `hosts_2.yaml` | 10 | 6 | 8 | 2 | 2 | 2 | 1 | 31 |
+| `hosts_3.yaml` | 15 | 9 | 12 | 3 | 3 | 3 | 1 | 46 |
+| `hosts_4.yaml` | 20 | 12 | 16 | 4 | 4 | 4 | 1 | 61 |
+
+
+Use [scenario_generation.py](CybORG/CybORG/Shared/Scenarios/scenario_generation.py) to create a custom scenario. For example, this creates a new 31-host training scenario:
+
+```bash
+uv run python CybORG/Shared/Scenarios/scenario_generation.py \
+  --export_path CybORG/Shared/Scenarios/scalability_experiments/custom \
+  --operational_n 8 --enterprise_n 6 --user_n 10 --resilience_n 2 \
+  --blue_reward AlignedReward
+```
+
+`--resilience_n` is the number of **each** CIA-critical server type, so `2` creates two Auth, two Database, and two Front servers. The generator also accepts reward levels (`--operational_w`, `--enterprise_w`, `--user_w`, `--resilience_w`) and subnet placement options (`--operational_s`, `--enterprise_s`, `--user_s`, `--resilience_s`, `--defender_s`). Subnet indices are Enterprise `0`, Operational `1`, and User `2`. The current generator keeps these three subnets; `--subnets` does not yet change their number.
+
+The existing training-scenario launcher can regenerate `base` through `hosts_5`, overwriting those training YAML files:
+
+```bash
+uv run bash CybORG/Shared/Scenarios/generate_resilience_scenario.sh
+```
+
+Action-space mappings for the four paper evaluation scenarios are already included in `CybORG/CybORG/Shared/Scenarios/scalability_eval_scenarios/action_spaces/`. Regenerate them without a trained checkpoint using:
+
+```bash
+uv run python export_action_space_mapping.py
+```
 
 ## Citation
 
 If you find this work useful, please consider citing our paper:
-```
+
+```bibtex
 @inproceedings{mujtaba2026autonomous,
   title={Alignment of Autonomous Cyber Defense Agents via Adaptive Policy Shaping},
   author={Dena Mujtaba and Bharadwaj Ravichandran and Brian Hu and Arslan Basharat},
