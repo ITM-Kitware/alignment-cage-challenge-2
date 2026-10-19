@@ -1,11 +1,13 @@
-# Adapted from Quantitative Resilience work
-# by Dartmouth team:
-# https://github.com/xcadet/CyberResilience/tree/main
+# Adapted from Quantitative Resilience Modeling for Autonomous Cyber Defense
+# by Cadet et al.: https://github.com/xcadet/CyberResilience
+# Upstream Copyright (c) 2025 Xavier Cadet; MIT License.
+# See ../Agents/Cadet/LICENSE for the full upstream notice.
+# Local modifications adapt scoring to per-step CAGE 2 alignment experiments.
 
-from CybORG.Agents.Castle.weighter import WEIGHTER_V2
-from CybORG.Agents.Castle.impact_reporters import ImpactReporter, IMPACT_AUTH, IMPACT_DATABASE, IMPACT_FRONT
-from CybORG.Agents.Castle.scorer_mappings import CONF_MAP_ORIGINAL, INTEG_MAP_ORIGINAL, AVAIL_MAP_ORIGINAL
-from CybORG.Agents.Castle.scorer import AVAIL_DROP_KEY, CONF_DROP_KEY, INTEGRITY_DROP_KEY
+from CybORG.Agents.Cadet.weighter import WEIGHTER_V2
+from CybORG.Agents.Cadet.impact_reporters import ImpactReporter, IMPACT_AUTH, IMPACT_DATABASE, IMPACT_FRONT
+from CybORG.Agents.Cadet.scorer_mappings import CONF_MAP_ORIGINAL, INTEG_MAP_ORIGINAL, AVAIL_MAP_ORIGINAL
+from CybORG.Agents.Cadet.scorer import AVAIL_DROP_KEY, CONF_DROP_KEY, INTEGRITY_DROP_KEY
 import statistics as stats
 import numpy as np
 from CybORG.Shared.Enums import TrinaryEnum

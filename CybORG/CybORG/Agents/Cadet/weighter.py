@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-from CybORG.Agents.Castle.scorer import AVAIL_DROP_KEY, CONF_DROP_KEY, INTEGRITY_DROP_KEY
+from CybORG.Agents.Cadet.scorer import AVAIL_DROP_KEY, CONF_DROP_KEY, INTEGRITY_DROP_KEY
 
 
 def weighted_sum(df: pd.DataFrame, name_to_weight: dict[str, float]) -> pd.DataFrame:

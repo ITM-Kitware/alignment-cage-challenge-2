@@ -7,7 +7,7 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 from ray.rllib.models import ModelCatalog
 from ray.rllib.policy import Policy
 
-from CybORG.Agents.Castle.action_mask_model import TorchActionMaskModel
+from CybORG.Agents.Cadet.action_mask_model import TorchActionMaskModel
 
 ModelCatalog.register_custom_model("my_model", TorchActionMaskModel)
 
@@ -15,7 +15,7 @@ import copy
 
 from CybORG.Shared.Actions import *
 
-from CybORG.Agents.Castle.agent_utils import *
+from CybORG.Agents.Cadet.agent_utils import *
 
 USE_ALL_DECOYS = False
 ASSETS_ONLY = False

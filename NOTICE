@@ -10,3 +10,13 @@ Defence Science & Technology Group (DST), Commonwealth of Australia:
 This product also includes code that is a work of the United States Government
 and is dedicated to the public domain under CC0 1.0 Universal.
 
+This product includes code adapted from CyberResilience, the implementation of
+"Quantitative Resilience Modeling for Autonomous Cyber Defense" by Cadet et al.:
+  - https://github.com/xcadet/CyberResilience
+    Copyright (c) 2025 Xavier Cadet
+    Licensed under the MIT License.
+    The adapted code is in CybORG/CybORG/Agents/Cadet/ and
+    CybORG/CybORG/AlignmentMetric/resilience_measure.py.
+    See CybORG/CybORG/Agents/Cadet/LICENSE for the upstream license and
+    CybORG/CybORG/Agents/Cadet/README.md for attribution and local changes.
+

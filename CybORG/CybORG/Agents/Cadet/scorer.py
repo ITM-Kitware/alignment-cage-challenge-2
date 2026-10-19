@@ -2,9 +2,9 @@ import argparse
 from typing import Dict
 
 import pandas as pd
-from CybORG.Agents.Castle.impact_reporters import (AVAIL_DROP_KEY, CONF_DROP_KEY, IMPACT_TYPE_KEY,
+from CybORG.Agents.Cadet.impact_reporters import (AVAIL_DROP_KEY, CONF_DROP_KEY, IMPACT_TYPE_KEY,
                               INTEGRITY_DROP_KEY)
-from CybORG.Agents.Castle.scorer_mappings import (AVAIL_MAP_ORIGINAL, AVAIL_MAP_V2, AVAIL_MAP_V3,
+from CybORG.Agents.Cadet.scorer_mappings import (AVAIL_MAP_ORIGINAL, AVAIL_MAP_V2, AVAIL_MAP_V3,
                              AVAIL_MAP_V4, CONF_MAP_ORIGINAL, CONF_MAP_V2,
                              CONF_MAP_V3, INTEG_MAP_ORIGINAL, INTEG_MAP_V2,
                              INTEG_MAP_V3)

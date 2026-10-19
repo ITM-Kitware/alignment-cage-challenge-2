@@ -30,7 +30,7 @@ from CybORG.Agents.SimpleAgents.Meander_Resilience import (
 from CybORG.Agents.SimpleAgents.CIAAttributeAgent import CIAAttributeAgent
 from CybORG.AlignmentMetric.resilience_measure import ResilienceMetric
 from cage_experiment import CAGEExperiment
-from CybORG.Agents.Castle.scorer import AVAIL_DROP_KEY, CONF_DROP_KEY, INTEGRITY_DROP_KEY
+from CybORG.Agents.Cadet.scorer import AVAIL_DROP_KEY, CONF_DROP_KEY, INTEGRITY_DROP_KEY
 
 
 def load_yaml(path: str) -> dict:

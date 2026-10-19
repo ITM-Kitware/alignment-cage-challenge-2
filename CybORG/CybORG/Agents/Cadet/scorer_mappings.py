@@ -1,4 +1,4 @@
-from CybORG.Agents.Castle.impact_reporters import (
+from CybORG.Agents.Cadet.impact_reporters import (
     IMPACT_NONE,
     IMPACT_AUTH,
     IMPACT_DATABASE,

@@ -30,6 +30,9 @@ dependencies = [
     "networkx",
 ]
 
+[tool.setuptools]
+license-files = ["LICENSE", "NOTICE", "CybORG/LICENSE.txt"]
+
 [tool.setuptools.packages.find]
 where = ["CybORG"]
 include = ["CybORG", "CybORG.*"]
@@ -37,3 +40,4 @@ exclude = ["CybORG.Tests*"]
 
 [tool.setuptools.package-data]
 CybORG = ["version.txt", "Shared/Config/*.ini", "Shared/Scenarios/*.yaml", "Shared/Scenarios/**/*.yaml", "Shared/Scenarios/**/*.json"]
+"CybORG.Agents.Cadet" = ["LICENSE", "README.md"]

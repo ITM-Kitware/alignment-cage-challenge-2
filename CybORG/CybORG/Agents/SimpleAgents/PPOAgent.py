@@ -9,7 +9,7 @@ from CybORG.Agents import B_lineAgent, GreenAgent
 import torch
 from torch import nn
 from CybORG.Shared.Actions import *
-from CybORG.Agents.Castle.agent_utils import *
+from CybORG.Agents.Cadet.agent_utils import *
 import copy
 from sb3_contrib import MaskablePPO
 from gymnasium import Space, spaces
@@ -149,7 +149,7 @@ class AlignedPPOAgent(PPOAgent):
         return f"Aligned RL {self.alpha} {self.align_attribute} agent"
     
 class ModifiedObservationWrapper(gym.Wrapper):
-    #overwrite cage env for CASTLE action masking
+    #overwrite cage env for Cadet action masking
     def __init__(self, env):
         super().__init__(env)
         self.decoy_history_init = None
